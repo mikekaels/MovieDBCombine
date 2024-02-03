@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Networking
 
 internal final class HomeVM {
-	
+
 }
 
 extension HomeVM {
