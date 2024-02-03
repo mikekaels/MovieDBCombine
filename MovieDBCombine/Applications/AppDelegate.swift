@@ -14,8 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-
+		customNavigationBar()
 		return true
+	}
+	
+	private func customNavigationBar() {
+		UINavigationBar.appearance().backgroundColor = UIColor(hex: "1E1C1C")
+		UINavigationBar.appearance().barTintColor = UIColor(hex: "1E1C1C")
+		
+		UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+		
+		UINavigationBar.appearance().tintColor = .white
+		
+		UINavigationBar.appearance().isTranslucent = true
+		
+		UINavigationBar.appearance().largeTitleTextAttributes = [
+			NSAttributedString.Key.foregroundColor: UIColor.white
+		]
+		
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+		UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -5000, vertical: 0), for: .default)
+		UIBarButtonItem.appearance().setBackButtonBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
 	}
 
 	// MARK: UISceneSession Lifecycle

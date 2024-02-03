@@ -24,6 +24,9 @@
 		F25BB49B2B6DF57E0043F726 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB49A2B6DF57E0043F726 /* APIRequest.swift */; };
 		F25BB49D2B6DF5920043F726 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB49C2B6DF5920043F726 /* NetworkResult.swift */; };
 		F25BB49F2B6DF5A40043F726 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB49E2B6DF5A40043F726 /* Networking.swift */; };
+		F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */; };
+		F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */; };
+		F25BB4A82B6DF8190043F726 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A72B6DF8190043F726 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		F25BB49A2B6DF57E0043F726 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		F25BB49C2B6DF5920043F726 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		F25BB49E2B6DF5A40043F726 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentCell.swift; sourceTree = "<group>"; };
+		F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Identifier.swift"; sourceTree = "<group>"; };
+		F25BB4A72B6DF8190043F726 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		FE23CA2BB2F9B0837D52A11E /* Pods-MovieDBCombine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBCombine.debug.xcconfig"; path = "Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,8 +161,8 @@
 		F25BB4702B6DEEDE0043F726 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F25BB4742B6DEEFD0043F726 /* Home */,
 				F25BB4712B6DEEE20043F726 /* TabBar */,
+				F25BB4742B6DEEFD0043F726 /* Home */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 			children = (
 				F25BB4782B6DEF1F0043F726 /* HomeVC.swift */,
 				F25BB47A2B6DEF260043F726 /* HomeVM.swift */,
+				F25BB4A02B6DF6950043F726 /* Views */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -238,6 +245,7 @@
 		F25BB4812B6DEF580043F726 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				F25BB4A72B6DF8190043F726 /* Movie.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -248,6 +256,7 @@
 				F25BB4832B6DF05F0043F726 /* Combine+CancelBag.swift */,
 				F25BB4852B6DF2590043F726 /* UIColor+Ext.swift */,
 				F25BB4872B6DF3830043F726 /* CustomColumnFlowLayout.swift */,
+				F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -261,6 +270,14 @@
 				F25BB49E2B6DF5A40043F726 /* Networking.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		F25BB4A02B6DF6950043F726 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +303,7 @@
 				F25BB4552B6DEE150043F726 /* Frameworks */,
 				F25BB4562B6DEE150043F726 /* Resources */,
 				F25BB4992B6DF5610043F726 /* Embed Frameworks */,
+				F407BACA7CC7C2548FC2D7E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -395,6 +413,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F407BACA7CC7C2548FC2D7E5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -406,9 +441,12 @@
 				F25BB4732B6DEEEA0043F726 /* TabBarController.swift in Sources */,
 				F25BB47B2B6DEF260043F726 /* HomeVM.swift in Sources */,
 				F25BB4842B6DF05F0043F726 /* Combine+CancelBag.swift in Sources */,
+				F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */,
 				F25BB4862B6DF2590043F726 /* UIColor+Ext.swift in Sources */,
 				F25BB45C2B6DEE150043F726 /* AppDelegate.swift in Sources */,
+				F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */,
 				F25BB4882B6DF3830043F726 /* CustomColumnFlowLayout.swift in Sources */,
+				F25BB4A82B6DF8190043F726 /* Movie.swift in Sources */,
 				F25BB45E2B6DEE150043F726 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,7 +520,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -545,7 +583,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
