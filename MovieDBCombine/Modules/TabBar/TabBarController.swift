@@ -12,16 +12,16 @@ class TabBarController: UITabBarController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let listVC = HomeVC()
-		listVC.tabBarItem = UITabBarItem(title: "Animals", image: UIImage(systemName: "pawprint.fill"), tag: 0)
+		let homeVC = HomeVC()
+		homeVC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "movieclapper.fill"), tag: 0)
 		
-		let favoriteVC = FavoriteVC()
-		favoriteVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 0)
+//		let favoriteVC = FavoriteVC()
+//		favoriteVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 0)
 		
 		//		let favoriteSwiftUI = UIHostingController(rootView: FavoriteView())
 		//		favoriteSwiftUI.tabBarItem = UITabBarItem(title: "Favorites SwiftUI", image: UIImage(systemName: "heart.circle.fill"), tag: 0)
 		
-		self.viewControllers = [listVC, favoriteVC]
+		self.viewControllers = [homeVC]
 		customizeTabBarAppearance()
 	}
 	

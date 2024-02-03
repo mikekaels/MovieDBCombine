@@ -6,3 +6,22 @@
 //
 
 import Foundation
+
+internal final class HomeVM {
+	
+}
+
+extension HomeVM {
+	struct Action {
+		
+	}
+	
+	class State {
+		
+	}
+	
+	internal func transform(_ action: Action, _ cancellables: CancelBag) -> State {
+		let state = State()
+		return state
+	}
+}
