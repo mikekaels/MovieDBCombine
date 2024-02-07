@@ -7,7 +7,15 @@
 
 import Foundation
 
-internal struct Movie: Hashable {
-	let title: String
-	let color: String
+struct Discovery {
+	let page: Int
+	let movies: [Movie]
+	let totalPages: Int
+}
+
+struct Movie: Hashable {
+	let movieTitle: String
+	let movieOverview: String
+	let movieImageUrl: String
+	let movieId: Int
 }
