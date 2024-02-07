@@ -9,7 +9,7 @@ import Networking
 import Combine
 
 internal protocol MovieRepositoryProtocol {
-	func getDiscoveries(apiKey: String, genre: String, page: Int) -> AnyPublisher<Discovery, ErrorResponse>
+	func getPopularMovies(page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse>
 }
 
 internal final class MovieRepository {
@@ -21,8 +21,8 @@ internal final class MovieRepository {
 }
 
 extension MovieRepository: MovieRepositoryProtocol {
-	func getDiscoveries(apiKey: String, genre: String, page: Int) -> AnyPublisher<Discovery, ErrorResponse> {
-		let apiRequest = DiscoveryRequest(apiKey: apiKey, genre: genre, page: page)
+	func getPopularMovies(page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse> {
+		let apiRequest = PopularMovieRequest(page: page)
 		let result = network.request(apiRequest)
 		return result.asPublisher
 	}

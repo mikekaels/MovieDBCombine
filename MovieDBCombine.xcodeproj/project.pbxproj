@@ -27,12 +27,15 @@
 		F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */; };
 		F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */; };
 		F25BB4A82B6DF8190043F726 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A72B6DF8190043F726 /* Movie.swift */; };
-		F25BB4AB2B6E089C0043F726 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4AA2B6E089C0043F726 /* APIKeys.swift */; };
-		F26C21932B73E45B00440093 /* DiscoveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21922B73E45B00440093 /* DiscoveryRequest.swift */; };
-		F26C21952B73E4A500440093 /* DiscoveryResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21942B73E4A500440093 /* DiscoveryResponses.swift */; };
+		F25BB4AB2B6E089C0043F726 /* TheMovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4AA2B6E089C0043F726 /* TheMovieDB.swift */; };
 		F26C21972B73E57F00440093 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21962B73E57F00440093 /* Constant.swift */; };
 		F26C21992B73E5C600440093 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21982B73E5C600440093 /* URLs.swift */; };
 		F26C219B2B73E7A400440093 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C219A2B73E7A400440093 /* MovieRepository.swift */; };
+		F26C219D2B73E88500440093 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C219C2B73E88500440093 /* HomeUseCase.swift */; };
+		F26C219F2B73EC3500440093 /* PopularMovieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C219E2B73EC3500440093 /* PopularMovieRequest.swift */; };
+		F26C21A12B73EDDB00440093 /* PopularMovieResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21A02B73EDDB00440093 /* PopularMovieResponses.swift */; };
+		F26C21A32B73EF8600440093 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21A22B73EF8600440093 /* BaseResponse.swift */; };
+		F26C21A72B73F30C00440093 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21A62B73F30C00440093 /* BaseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,12 +85,15 @@
 		F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentCell.swift; sourceTree = "<group>"; };
 		F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Identifier.swift"; sourceTree = "<group>"; };
 		F25BB4A72B6DF8190043F726 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		F25BB4AA2B6E089C0043F726 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
-		F26C21922B73E45B00440093 /* DiscoveryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryRequest.swift; sourceTree = "<group>"; };
-		F26C21942B73E4A500440093 /* DiscoveryResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryResponses.swift; sourceTree = "<group>"; };
+		F25BB4AA2B6E089C0043F726 /* TheMovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDB.swift; sourceTree = "<group>"; };
 		F26C21962B73E57F00440093 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F26C21982B73E5C600440093 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		F26C219A2B73E7A400440093 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
+		F26C219C2B73E88500440093 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
+		F26C219E2B73EC3500440093 /* PopularMovieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieRequest.swift; sourceTree = "<group>"; };
+		F26C21A02B73EDDB00440093 /* PopularMovieResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieResponses.swift; sourceTree = "<group>"; };
+		F26C21A22B73EF8600440093 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		F26C21A62B73F30C00440093 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		FE23CA2BB2F9B0837D52A11E /* Pods-MovieDBCombine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBCombine.debug.xcconfig"; path = "Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,7 +244,8 @@
 		F25BB47E2B6DEF430043F726 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				F26C21942B73E4A500440093 /* DiscoveryResponses.swift */,
+				F26C21A02B73EDDB00440093 /* PopularMovieResponses.swift */,
+				F26C21A22B73EF8600440093 /* BaseResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -246,7 +253,7 @@
 		F25BB47F2B6DEF4B0043F726 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				F26C21922B73E45B00440093 /* DiscoveryRequest.swift */,
+				F26C219E2B73EC3500440093 /* PopularMovieRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -254,6 +261,7 @@
 		F25BB4802B6DEF520043F726 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				F26C219C2B73E88500440093 /* HomeUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				F25BB4A72B6DF8190043F726 /* Movie.swift */,
+				F26C21A62B73F30C00440093 /* BaseModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -300,7 +309,7 @@
 		F25BB4A92B6E08830043F726 /* NetworkConfig */ = {
 			isa = PBXGroup;
 			children = (
-				F25BB4AA2B6E089C0043F726 /* APIKeys.swift */,
+				F25BB4AA2B6E089C0043F726 /* TheMovieDB.swift */,
 				F26C21982B73E5C600440093 /* URLs.swift */,
 			);
 			path = NetworkConfig;
@@ -463,18 +472,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F26C21932B73E45B00440093 /* DiscoveryRequest.swift in Sources */,
+				F26C219D2B73E88500440093 /* HomeUseCase.swift in Sources */,
 				F25BB4792B6DEF1F0043F726 /* HomeVC.swift in Sources */,
+				F26C21A12B73EDDB00440093 /* PopularMovieResponses.swift in Sources */,
 				F26C21972B73E57F00440093 /* Constant.swift in Sources */,
 				F25BB4732B6DEEEA0043F726 /* TabBarController.swift in Sources */,
-				F26C21952B73E4A500440093 /* DiscoveryResponses.swift in Sources */,
 				F26C219B2B73E7A400440093 /* MovieRepository.swift in Sources */,
 				F25BB47B2B6DEF260043F726 /* HomeVM.swift in Sources */,
 				F25BB4842B6DF05F0043F726 /* Combine+CancelBag.swift in Sources */,
 				F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */,
+				F26C21A32B73EF8600440093 /* BaseResponse.swift in Sources */,
 				F25BB4862B6DF2590043F726 /* UIColor+Ext.swift in Sources */,
-				F25BB4AB2B6E089C0043F726 /* APIKeys.swift in Sources */,
+				F25BB4AB2B6E089C0043F726 /* TheMovieDB.swift in Sources */,
 				F25BB45C2B6DEE150043F726 /* AppDelegate.swift in Sources */,
+				F26C219F2B73EC3500440093 /* PopularMovieRequest.swift in Sources */,
+				F26C21A72B73F30C00440093 /* BaseModel.swift in Sources */,
 				F26C21992B73E5C600440093 /* URLs.swift in Sources */,
 				F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */,
 				F25BB4882B6DF3830043F726 /* CustomColumnFlowLayout.swift in Sources */,

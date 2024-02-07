@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 internal final class HomeVC: UIViewController {
 	enum Section {
@@ -15,6 +16,7 @@ internal final class HomeVC: UIViewController {
 	
 	private let viewModel: HomeVM
 	private let cancellables = CancelBag()
+	private let didLoadPublisher = PassthroughSubject<Void, Never>()
 	
 	init(viewModel: HomeVM = HomeVM()) {
 		self.viewModel = viewModel
@@ -30,6 +32,7 @@ internal final class HomeVC: UIViewController {
 		setupView()
 		bindViewModel()
 		setupNavBar()
+		didLoadPublisher.send(())
 	}
 	
 	private lazy var searchController: UISearchController = {
@@ -57,7 +60,7 @@ internal final class HomeVC: UIViewController {
 			if case let .content(data) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeContentCell.identifier, for: indexPath) as? HomeContentCell {
 //				cell.set(image: data.image)
 				cell.set(title: data.title)
-				cell.set(backgroundColor: data.color)
+//				cell.set(backgroundColor: data.color)
 				return cell
 			}
 			
@@ -67,7 +70,7 @@ internal final class HomeVC: UIViewController {
 	}()
 	
 	private func bindViewModel() {
-		let action = HomeVM.Action()
+		let action = HomeVM.Action(didLoad: didLoadPublisher)
 		let state = viewModel.transform(action, cancellables)
 		
 		state.$dataSources
