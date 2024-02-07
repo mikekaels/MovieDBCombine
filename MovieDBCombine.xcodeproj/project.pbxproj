@@ -27,6 +27,7 @@
 		F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */; };
 		F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */; };
 		F25BB4A82B6DF8190043F726 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4A72B6DF8190043F726 /* Movie.swift */; };
+		F25BB4AB2B6E089C0043F726 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4AA2B6E089C0043F726 /* APIKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentCell.swift; sourceTree = "<group>"; };
 		F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Identifier.swift"; sourceTree = "<group>"; };
 		F25BB4A72B6DF8190043F726 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		F25BB4AA2B6E089C0043F726 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FE23CA2BB2F9B0837D52A11E /* Pods-MovieDBCombine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBCombine.debug.xcconfig"; path = "Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 		F25BB45A2B6DEE150043F726 /* MovieDBCombine */ = {
 			isa = PBXGroup;
 			children = (
+				F25BB4A92B6E08830043F726 /* APIConfig */,
 				F25BB4822B6DF0500043F726 /* Utils */,
 				F25BB46F2B6DEE610043F726 /* Applications */,
 				F25BB4702B6DEEDE0043F726 /* Modules */,
@@ -278,6 +281,14 @@
 				F25BB4A32B6DF6D00043F726 /* HomeContentCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F25BB4A92B6E08830043F726 /* APIConfig */ = {
+			isa = PBXGroup;
+			children = (
+				F25BB4AA2B6E089C0043F726 /* APIKeys.swift */,
+			);
+			path = APIConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,6 +454,7 @@
 				F25BB4842B6DF05F0043F726 /* Combine+CancelBag.swift in Sources */,
 				F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */,
 				F25BB4862B6DF2590043F726 /* UIColor+Ext.swift in Sources */,
+				F25BB4AB2B6E089C0043F726 /* APIKeys.swift in Sources */,
 				F25BB45C2B6DEE150043F726 /* AppDelegate.swift in Sources */,
 				F25BB4A42B6DF6D00043F726 /* HomeContentCell.swift in Sources */,
 				F25BB4882B6DF3830043F726 /* CustomColumnFlowLayout.swift in Sources */,
