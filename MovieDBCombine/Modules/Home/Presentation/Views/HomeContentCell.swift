@@ -25,39 +25,40 @@ internal final class HomeContentCell: UICollectionViewCell {
 	
 	private let contentTitleLabel: UILabel = {
 		let label = UILabel()
-		label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-		label.numberOfLines = 0
-		label.textAlignment = .right
+		label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+		label.numberOfLines = 1
+		label.lineBreakMode = .byTruncatingTail
+		label.textAlignment = .left
 		label.textColor = .white
-		
-		label.layer.shadowColor = UIColor.black.cgColor
-		label.layer.shadowRadius = 1.0
-		label.layer.shadowOpacity = 0.2
-		label.layer.shadowOffset = CGSize(width: 2, height: 2)
-		label.layer.masksToBounds = false
+		return label
+	}()
+	
+	private let yearLabel: UILabel = {
+		let label = UILabel()
+		label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
+		label.numberOfLines = 1
+		label.textAlignment = .left
+		label.textColor = .white.withAlphaComponent(0.6)
 		return label
 	}()
 	
 	private let imageContainerView: UIView = {
 		let view = UIView()
-		view.layer.cornerRadius = 5
-		view.layer.cornerRadius = 8.0
-		view.layer.shadowColor = UIColor.black.cgColor
-		view.layer.shadowOffset = CGSize(width: 0, height: 2)
-		view.layer.shadowOpacity = 0.5
-		view.layer.shadowRadius = 4.0
+		view.layer.cornerRadius = 3
 		view.layer.masksToBounds = false
-		
-		view.transform = CGAffineTransform(rotationAngle: 20 * .pi / 180)
 		return view
 	}()
 	
 	private let imageView: UIImageView = {
 		let image = UIImageView()
 		image.contentMode = .scaleAspectFill
-		image.layer.cornerRadius = 10
-		image.layer.masksToBounds = true
 		return image
+	}()
+	
+	private let overlayView: UIView = {
+		let view = UIView()
+		view.backgroundColor = .black.withAlphaComponent(0.3)
+		return view
 	}()
 	
 	private func setupView() {
@@ -71,20 +72,27 @@ internal final class HomeContentCell: UICollectionViewCell {
 			make.centerY.equalToSuperview()
 		}
 		
-		[imageContainerView, ].forEach { cardView.addSubview($0) }
+		[imageContainerView].forEach { cardView.addSubview($0) }
 		contentView.addSubview(contentTitleLabel)
+		contentView.addSubview(yearLabel)
 		
 		imageContainerView.snp.makeConstraints { make in
-			make.height.equalTo(110)
-			make.width.equalTo(140)
-			make.left.equalToSuperview().offset(-20)
-			make.bottom.equalToSuperview().offset(15)
+			make.width.equalToSuperview()
+			make.height.equalToSuperview().offset(-50)
+			make.centerX.equalToSuperview()
+			make.top.equalToSuperview()
 		}
 		
 		contentTitleLabel.snp.makeConstraints { make in
-			make.right.equalTo(cardView).offset(-10)
-			make.left.equalTo(cardView).offset(10)
-			make.top.equalTo(cardView).offset(10)
+			make.right.equalTo(cardView)
+			make.left.equalTo(cardView)
+			make.top.equalTo(imageContainerView.snp.bottom).offset(10)
+		}
+		
+		yearLabel.snp.makeConstraints { make in
+			make.right.equalTo(cardView)
+			make.left.equalTo(cardView)
+			make.top.equalTo(contentTitleLabel.snp.bottom).offset(5)
 		}
 		
 		imageContainerView.addSubview(imageView)
@@ -101,12 +109,7 @@ internal final class HomeContentCell: UICollectionViewCell {
 extension HomeContentCell {
 	internal func set(image: String) {
 		if let url = URL(string: image) {
-			self.imageView.kf.setImage(with: url, options: [
-				.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 70))),
-				.scaleFactor(UIScreen.main.scale),
-				.forceRefresh,
-				.transition(.flipFromBottom(0.8))
-			])
+			self.imageView.kf.setImage(with: url)
 		}
 	}
 	
@@ -114,8 +117,8 @@ extension HomeContentCell {
 		self.contentTitleLabel.text = title
 	}
 	
-	internal func set(backgroundColor: String) {
-		self.cardView.backgroundColor = UIColor(hex: backgroundColor)
+	internal func set(year: String) {
+		self.yearLabel.text = year
 	}
 }
 

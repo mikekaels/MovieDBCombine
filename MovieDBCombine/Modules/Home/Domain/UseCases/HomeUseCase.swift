@@ -10,6 +10,8 @@ import Networking
 
 internal protocol HomeUseCaseProtocol {
 	func getPopularMovies(page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse>
+	func searchMovies(keyword: String, page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse>
+	func shimmers() -> [HomeVM.DataSourceType]
 }
 
 internal final class HomeUseCase {
@@ -21,6 +23,23 @@ internal final class HomeUseCase {
 }
 
 extension HomeUseCase: HomeUseCaseProtocol {
+	func shimmers() -> [HomeVM.DataSourceType] {
+		return [
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+			.shimmer(UUID().uuidString),
+		]
+	}
+	
+	func searchMovies(keyword: String, page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse> {
+		return movieRepository.searchMovies(keyword: keyword, page: page)
+	}
+	
 	func getPopularMovies(page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse> {
 		return movieRepository.getPopularMovies(page: page)
 	}

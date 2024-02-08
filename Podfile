@@ -5,7 +5,8 @@ target 'MovieDBCombine' do
 	pod 'Kingfisher' 
 	pod 'SnapKit'
 	pod 'CombineCocoa'
-
+	pod 'SkeletonView'
+	pod 'IQKeyboardManagerSwift'
 end
 
 post_install do |installer|

@@ -6,11 +6,10 @@
 //
 
 internal struct MovieResponse: Codable {
-	let id: Int?
 	let posterPath, releaseDate, title: String?
 	
 	enum CodingKeys: String, CodingKey {
-		case id, title
+		case title
 		case posterPath = "poster_path"
 		case releaseDate = "release_date"
 	}

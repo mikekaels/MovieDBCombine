@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Combine
+import CombineCocoa
 
 internal final class HomeVC: UIViewController {
 	enum Section {
@@ -17,6 +18,8 @@ internal final class HomeVC: UIViewController {
 	private let viewModel: HomeVM
 	private let cancellables = CancelBag()
 	private let didLoadPublisher = PassthroughSubject<Void, Never>()
+	private let searchDidChangePublisher = PassthroughSubject<String, Never>()
+	private let searchDidCancelPublisher = PassthroughSubject<Void, Never>()
 	
 	init(viewModel: HomeVM = HomeVM()) {
 		self.viewModel = viewModel
@@ -32,6 +35,7 @@ internal final class HomeVC: UIViewController {
 		setupView()
 		bindViewModel()
 		setupNavBar()
+		bindView()
 		didLoadPublisher.send(())
 	}
 	
@@ -47,20 +51,39 @@ internal final class HomeVC: UIViewController {
 	}()
 	
 	private let collectionView: UICollectionView = {
-		let collection = UICollectionView(frame: .zero, collectionViewLayout: CustomColumnFlowLayout(height: 260, totalColumn: 2))
+		let collection = UICollectionView(frame: .zero, collectionViewLayout: CustomColumnFlowLayout(height: 330, totalColumn: 2))
 		collection.backgroundColor = UIColor(hex: "1E1C1C")
 		collection.register(HomeContentCell.self, forCellWithReuseIdentifier: HomeContentCell.identifier)
+		collection.register(HomeContentShimmerCell.self, forCellWithReuseIdentifier: HomeContentShimmerCell.identifier)
+		collection.register(HomeErrorCell.self, forCellWithReuseIdentifier: HomeErrorCell.identifier)
 		return collection
 	}()
 	
 	private lazy var dataSource: UICollectionViewDiffableDataSource<Section, HomeVM.DataSourceType> = {
 		let dataSource = UICollectionViewDiffableDataSource<Section, HomeVM.DataSourceType>(collectionView: collectionView) { [weak self] collectionView, indexPath, type in
-			guard let self = self else { return UICollectionViewCell() }
 			
 			if case let .content(data) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeContentCell.identifier, for: indexPath) as? HomeContentCell {
-//				cell.set(image: data.image)
+				cell.set(image: data.posterPath)
 				cell.set(title: data.title)
-//				cell.set(backgroundColor: data.color)
+				cell.set(year: data.year)
+				return cell
+			}
+			
+			if case .shimmer = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeContentShimmerCell.identifier, for: indexPath) as? HomeContentShimmerCell {
+				return cell
+			}
+			
+			if case let .error(image, title, desc, buttonTitle) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeErrorCell.identifier, for: indexPath) as? HomeErrorCell {
+				cell.set(image: image)
+				cell.set(title: title)
+				cell.set(description: desc)
+				cell.set(buttonTitle: buttonTitle)
+				
+				cell.buttonDidTapPublisher
+					.sink { [weak self] _ in
+						self?.didLoadPublisher.send(())
+					}
+					.store(in: cell.cancellables)
 				return cell
 			}
 			
@@ -70,7 +93,11 @@ internal final class HomeVC: UIViewController {
 	}()
 	
 	private func bindViewModel() {
-		let action = HomeVM.Action(didLoad: didLoadPublisher)
+		let action = HomeVM.Action(
+			didLoad: didLoadPublisher,
+			searchDidCancel: searchDidCancelPublisher.eraseToAnyPublisher(),
+			searchDidChange: searchDidChangePublisher
+		)
 		let state = viewModel.transform(action, cancellables)
 		
 		state.$dataSources
@@ -84,6 +111,33 @@ internal final class HomeVC: UIViewController {
 			}
 			.store(in: cancellables)
 		
+		Publishers.CombineLatest(state.$column,  state.$cellHeight)
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] (column, height) in
+				self?.collectionView.collectionViewLayout = CustomColumnFlowLayout(height: height, totalColumn: CGFloat(column))
+				self?.collectionView.reloadData()
+			}
+			.store(in: cancellables)
+	}
+	
+	private func bindView() {
+		collectionView.reachedBottomPublisher()
+			.sink { [weak self] _ in
+				self?.didLoadPublisher.send(())
+			}
+			.store(in: cancellables)
+		
+		searchController.searchBar.textDidChangePublisher
+			.sink { [weak self] text in
+				self?.searchDidChangePublisher.send(text)
+			}
+			.store(in: cancellables)
+		
+		searchController.searchBar.cancelButtonClickedPublisher
+			.sink { [weak self] _ in
+				self?.searchDidCancelPublisher.send(())
+			}
+			.store(in: cancellables)
 	}
 	
 	private func setupView() {

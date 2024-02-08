@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		customNavigationBar()
+		cachingConfiguration()
+		IQKeyboardManager.shared.enable = true
+		IQKeyboardManager.shared.resignOnTouchOutside = true
 		return true
+	}
+	
+	private func cachingConfiguration() {
+		let cache = ImageCache.default
+		cache.memoryStorage.config.totalCostLimit = 1
 	}
 	
 	private func customNavigationBar() {

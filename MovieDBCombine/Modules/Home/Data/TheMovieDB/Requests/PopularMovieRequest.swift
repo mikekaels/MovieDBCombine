@@ -15,7 +15,7 @@ internal struct PopularMovieRequest: APIRequest {
 		path = "/discover/movie?page=\(page)"
 	}
 	
-	var baseURL: String = Constant.URLs.baseURL
+	var baseURL: String = Constant.TheMovieDB.baseURL
 	
 	var method: HTTPMethod = .get
 	
@@ -30,10 +30,14 @@ internal struct PopularMovieRequest: APIRequest {
 	
 	func map(_ data: Data) throws -> BaseModel<[Movie]> {
 		let decoded = try JSONDecoder().decode(BaseResponse<[MovieResponse]>.self, from: data)
+		
 		let movies = decoded.results?.compactMap {
-			Movie(id: $0.id ?? 0, posterPath: "https://image.tmdb.org/t/p/w200/\($0.posterPath ?? "")", releaseDate: $0.releaseDate ?? "", title: $0.title ?? "")
-		} ?? []
-		let result = BaseModel<[Movie]>(page: decoded.page ?? 0, totalPages: decoded.totalPages ?? 0, items: movies)
+			let releaseData = $0.releaseDate ?? ""
+			let year = String(releaseData.prefix(4))
+			return Movie(posterPath: "https://image.tmdb.org/t/p/w200/\($0.posterPath ?? "")", year: year, title: $0.title ?? "")
+		}
+		
+		let result = BaseModel<[Movie]>(page: decoded.page ?? 0, totalPages: decoded.totalPages ?? 0, items: movies ?? [])
 		return result
 	}
 }

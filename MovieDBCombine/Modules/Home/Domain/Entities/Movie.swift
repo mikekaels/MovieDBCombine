@@ -5,8 +5,10 @@
 //  Created by Santo Michael on 03/02/24.
 //
 
+import Foundation
 
-internal struct Movie: Hashable {
-	let id: Int
-	let posterPath, releaseDate, title: String
+
+internal struct Movie: Hashable, Identifiable {
+	let id = UUID()
+	let posterPath, year, title: String
 }

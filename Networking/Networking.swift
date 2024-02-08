@@ -24,12 +24,18 @@ public final class Networking: NSObject {
 extension Networking: NetworkingProtocol {
 	public func request<T: APIRequest>(_ request: T) -> NetworkResult<T.Response> {
 		let semaphore = DispatchSemaphore(value: 0)
+		
 		var responseResult: NetworkResult<T.Response> = .failure(ErrorResponse(type: .cancelled, message: "Canceled", code: -1000))
 		
-		guard let urlRequest =  createURLRequest(from: request) else {
+		guard Reachability.isConnectedToNetwork() else {
+			return  .failure(ErrorResponse(type: .noInternet, message: "No internet connection", code: -1003))
+		}
+		guard let urlRequest = createURLRequest(from: request) else {
 			responseResult = .failure(ErrorResponse(type: .invalidResponse, message: "Invalid to create URL Request", code: -1001))
 			return responseResult
 		}
+		
+		
 		
 		let task = service.dataTask(with: urlRequest) { [weak self] data, response, error in
 			guard let self = self else { return }

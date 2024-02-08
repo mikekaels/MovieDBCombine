@@ -17,6 +17,8 @@ extension Constant {
 			return "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWJkODkxMDk3ZWJjNDZjNWIwY2FiNzE4MmQwNWUzMCIsInN1YiI6IjVlNTg5YTg0ZjQ4YjM0MDAxMzdiMWViYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jnEA6v27xVXElLsejJxPBwHfExzp3IogPuZPramfwAs"
 		}
 		
-		
+		static var baseURL: String {
+			return "https://api.themoviedb.org/3"
+		}
 	}
 }
