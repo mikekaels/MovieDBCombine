@@ -12,7 +12,6 @@
 		F25BB45E2B6DEE150043F726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB45D2B6DEE150043F726 /* SceneDelegate.swift */; };
 		F25BB4652B6DEE170043F726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25BB4642B6DEE170043F726 /* Assets.xcassets */; };
 		F25BB4682B6DEE170043F726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25BB4662B6DEE170043F726 /* LaunchScreen.storyboard */; };
-		F25BB4732B6DEEEA0043F726 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4722B6DEEEA0043F726 /* TabBarController.swift */; };
 		F25BB4792B6DEF1F0043F726 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4782B6DEF1F0043F726 /* HomeVC.swift */; };
 		F25BB47B2B6DEF260043F726 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB47A2B6DEF260043F726 /* HomeVM.swift */; };
 		F25BB4842B6DF05F0043F726 /* Combine+CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25BB4832B6DF05F0043F726 /* Combine+CancelBag.swift */; };
@@ -76,7 +75,6 @@
 		F25BB4642B6DEE170043F726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F25BB4672B6DEE170043F726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F25BB4692B6DEE170043F726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F25BB4722B6DEEEA0043F726 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F25BB4782B6DEF1F0043F726 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F25BB47A2B6DEF260043F726 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		F25BB4832B6DF05F0043F726 /* Combine+CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+CancelBag.swift"; sourceTree = "<group>"; };
@@ -190,18 +188,9 @@
 		F25BB4702B6DEEDE0043F726 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F25BB4712B6DEEE20043F726 /* TabBar */,
 				F25BB4742B6DEEFD0043F726 /* Home */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		F25BB4712B6DEEE20043F726 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				F25BB4722B6DEEEA0043F726 /* TabBarController.swift */,
-			);
-			path = TabBar;
 			sourceTree = "<group>";
 		};
 		F25BB4742B6DEEFD0043F726 /* Home */ = {
@@ -524,7 +513,6 @@
 				F25BB4792B6DEF1F0043F726 /* HomeVC.swift in Sources */,
 				F26C21A12B73EDDB00440093 /* PopularMovieResponses.swift in Sources */,
 				F26C21972B73E57F00440093 /* Constant.swift in Sources */,
-				F25BB4732B6DEEEA0043F726 /* TabBarController.swift in Sources */,
 				F26C219B2B73E7A400440093 /* MovieRepository.swift in Sources */,
 				F25BB47B2B6DEF260043F726 /* HomeVM.swift in Sources */,
 				F26C21B92B74CC5A00440093 /* HomeErrorCell.swift in Sources */,
