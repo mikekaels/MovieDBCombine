@@ -5,6 +5,7 @@
 ## Features
 - List of movies
 - Search
+- Local caching
 
 ### Clean Architecture
 ![Clean Architechture](https://ik.imagekit.io/m1ke1magek1t/CleanArch.png?updatedAt=1705685276939)
