@@ -17,8 +17,8 @@ internal final class HomeVM {
 
 	enum DataSourceType: Hashable {
 		case content(Movie)
-		case shimmer(String)
-		case error(image: String, title: String, desc: String, buttonTitle: String? = nil)
+		case shimmer(String = UUID().uuidString)
+		case error(HomeErrorType)
 	}
 }
 
@@ -46,6 +46,19 @@ extension HomeVM {
 	internal func transform(_ action: Action, _ cancellables: CancelBag) -> State {
 		let state = State()
 		
+		func shimmers() -> [DataSourceType] {
+			return [
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+				.shimmer(),
+			]
+		}
+		
 		action.didLoad
 			.sink { _ in
 				action.getLocalMovies.send(())
@@ -72,7 +85,21 @@ extension HomeVM {
 						return
 					}
 					
-					state.dataSources = movies.map { .content($0) }
+					let filteredMovies: [Movie] = !state.searchKeyword.isEmpty ? movies.filter { $0.title.contains(state.searchKeyword) } : movies
+					
+					guard !filteredMovies.isEmpty else {
+						state.column = 1
+						state.cellHeight = 600
+						state.dataSources = [.error(.notFound(state.searchKeyword))]
+						return
+					}
+					
+					if state.column == 1 {
+						state.column = 2
+						state.cellHeight = 330
+					}
+					state.dataSources = filteredMovies.map { .content($0) }
+					
 				}
 			}
 			.store(in: cancellables)
@@ -84,9 +111,9 @@ extension HomeVM {
 					if case .shimmer = $0 { return true }
 					return false
 				}) {
-					return state.dataSources = self.useCase.shimmers()
+					return state.dataSources = shimmers()
 				} else if isLoading {
-					state.dataSources = !state.dataSources.isEmpty ? state.dataSources + self.useCase.shimmers() : self.useCase.shimmers()
+					state.dataSources = !state.dataSources.isEmpty ? state.dataSources + shimmers() : shimmers()
 				} else {
 					state.dataSources.removeAll(where: {
 						if case .shimmer = $0 { return true }
@@ -123,7 +150,7 @@ extension HomeVM {
 					if error.type == .noInternet, self.useCase.localMovies.isEmpty {
 						state.column = 1
 						state.cellHeight = 600
-						state.dataSources = [.error(image: "no_internet", title: "No internet", desc: "Check your connection or try again", buttonTitle: "Try again")]
+						state.dataSources = [.error(.noInternet)]
 					}
 				}
 				
@@ -131,8 +158,7 @@ extension HomeVM {
 					guard !result.items.isEmpty else {
 						state.column = 1
 						state.cellHeight = 600
-						state.dataSources = [.error(image: "not_found", title: "Not found", desc: "Sorry, we couldn't find movie with title \"\(state.searchKeyword)\"")]
-						
+						state.dataSources = [.error(.notFound(state.searchKeyword))]
 						return
 					}
 					state.totalPage = result.totalPages
@@ -141,7 +167,7 @@ extension HomeVM {
 						return nil
 					}
 					
-					let differ = self.useCase.differentiateArrays(dataSource, result.items) { $0.title }
+					let differ = dataSource.differentiate(with: result.items) { $0.title }
 					
 					state.dataSources += differ.onlyInSecond.map { .content($0) }
 					
@@ -153,48 +179,35 @@ extension HomeVM {
 			.store(in: cancellables)
 		
 		action.searchDidChange
-			.filter { text in
-				if !self.useCase.networkReachability {
-					if text.isEmpty {
-						action.getLocalMovies.send(())
-					} else {
-						state.dataSources = self.useCase.localMovies
-							.filter { $0.title.contains(text) }
-							.map { .content($0) }
-					}
-					return false
-				}
-				return true
-			}
-			.debounce(for: 0.75, scheduler: DispatchQueue.main)
-			.sink { text in
+			.sink { [weak self] text in
+				guard let self = self else { return }
 				state.searchKeyword = text
 				state.page = 1
 				state.totalPage = 0
 				state.dataSources.removeAll()
-				guard !text.isEmpty else {
-					state.searchKeyword = "Avengers"
-					action.fetchMovies.send(())
-					return
+				
+				if !self.useCase.networkReachability {
+					return action.getLocalMovies.send(())
 				}
+				
+				if text.isEmpty {
+					state.searchKeyword = "Avengers"
+					return action.fetchMovies.send(())
+				}
+				
 				action.fetchMovies.send(())
 			}
 			.store(in: cancellables)
 		
 		action.searchDidCancel
-			.filter {
-				if !self.useCase.networkReachability {
-					state.dataSources = self.useCase.localMovies.map { .content($0) }
-					return false
-				}
-				return true
-			}
 			.sink { text in
 				guard state.dataSources.contains (where: {
 					if case .error = $0 { return true }
 					if case .shimmer = $0 { return true }
 					return false
 				}) else { return }
+				state.column = 2
+				state.cellHeight = 330
 				state.dataSources.removeAll()
 				state.searchKeyword = "Avengers"
 				action.getLocalMovies.send(())

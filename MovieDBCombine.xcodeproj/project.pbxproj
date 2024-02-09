@@ -42,6 +42,9 @@
 		F26C21F02B762BDE00440093 /* XCTestCase+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21EF2B762BDE00440093 /* XCTestCase+Wait.swift */; };
 		F26C21F32B762C0B00440093 /* HomeTestCaseSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21F22B762C0B00440093 /* HomeTestCaseSuccessMock.swift */; };
 		F26C21F52B762E3200440093 /* HomeVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21F42B762E3200440093 /* HomeVMTests.swift */; };
+		F26C21F72B76331C00440093 /* HomeTestCaseFailedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21F62B76331C00440093 /* HomeTestCaseFailedMock.swift */; };
+		F26C21F92B76362D00440093 /* Array+Differ.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21F82B76362D00440093 /* Array+Differ.swift */; };
+		F26C21FD2B76604100440093 /* HomeErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C21FC2B76604100440093 /* HomeErrorType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +117,9 @@
 		F26C21EF2B762BDE00440093 /* XCTestCase+Wait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Wait.swift"; sourceTree = "<group>"; };
 		F26C21F22B762C0B00440093 /* HomeTestCaseSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestCaseSuccessMock.swift; sourceTree = "<group>"; };
 		F26C21F42B762E3200440093 /* HomeVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVMTests.swift; sourceTree = "<group>"; };
+		F26C21F62B76331C00440093 /* HomeTestCaseFailedMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestCaseFailedMock.swift; sourceTree = "<group>"; };
+		F26C21F82B76362D00440093 /* Array+Differ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Differ.swift"; sourceTree = "<group>"; };
+		F26C21FC2B76604100440093 /* HomeErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeErrorType.swift; sourceTree = "<group>"; };
 		FE23CA2BB2F9B0837D52A11E /* Pods-MovieDBCombine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBCombine.debug.xcconfig"; path = "Target Support Files/Pods-MovieDBCombine/Pods-MovieDBCombine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,6 +280,7 @@
 			children = (
 				F25BB4A72B6DF8190043F726 /* Movie.swift */,
 				F26C21A62B73F30C00440093 /* BaseModel.swift */,
+				F26C21FC2B76604100440093 /* HomeErrorType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -286,6 +293,7 @@
 				F25BB4852B6DF2590043F726 /* UIColor+Ext.swift */,
 				F25BB4872B6DF3830043F726 /* CustomColumnFlowLayout.swift */,
 				F25BB4A52B6DF7890043F726 /* NSObject+Identifier.swift */,
+				F26C21F82B76362D00440093 /* Array+Differ.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -368,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				F26C21F22B762C0B00440093 /* HomeTestCaseSuccessMock.swift */,
+				F26C21F62B76331C00440093 /* HomeTestCaseFailedMock.swift */,
 				F26C21F42B762E3200440093 /* HomeVMTests.swift */,
 			);
 			path = HomeTests;
@@ -563,12 +572,14 @@
 				F26C219D2B73E88500440093 /* HomeUseCase.swift in Sources */,
 				F26C21A92B73FEC900440093 /* OMDB.swift in Sources */,
 				F25BB4792B6DEF1F0043F726 /* HomeVC.swift in Sources */,
+				F26C21FD2B76604100440093 /* HomeErrorType.swift in Sources */,
 				F26C21972B73E57F00440093 /* Constant.swift in Sources */,
 				F26C219B2B73E7A400440093 /* MovieRepository.swift in Sources */,
 				F25BB47B2B6DEF260043F726 /* HomeVM.swift in Sources */,
 				F26C21C42B753F1000440093 /* MoviePersistence+CoreDataProperties.swift in Sources */,
 				F26C21B92B74CC5A00440093 /* HomeErrorCell.swift in Sources */,
 				F25BB4842B6DF05F0043F726 /* Combine+CancelBag.swift in Sources */,
+				F26C21F92B76362D00440093 /* Array+Differ.swift in Sources */,
 				F25BB4A62B6DF7890043F726 /* NSObject+Identifier.swift in Sources */,
 				F26C21C12B753E8700440093 /* MoviePersistence.xcdatamodeld in Sources */,
 				F26C21AB2B73FF6300440093 /* HomeContentShimmerCell.swift in Sources */,
@@ -603,6 +614,7 @@
 				F26C21F32B762C0B00440093 /* HomeTestCaseSuccessMock.swift in Sources */,
 				F26C21F02B762BDE00440093 /* XCTestCase+Wait.swift in Sources */,
 				F26C21F52B762E3200440093 /* HomeVMTests.swift in Sources */,
+				F26C21F72B76331C00440093 /* HomeTestCaseFailedMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

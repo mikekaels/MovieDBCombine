@@ -11,7 +11,8 @@ extension XCTestCase {
 	func wait(timeout: TimeInterval = 1.0, completion: @escaping (() -> Void)) {
 		let expectation = XCTestExpectation(description: self.debugDescription)
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
+			completion()
 			expectation.fulfill()
 		}
 		

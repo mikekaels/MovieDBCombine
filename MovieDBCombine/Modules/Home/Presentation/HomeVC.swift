@@ -21,6 +21,7 @@ internal final class HomeVC: UIViewController {
 	private let fetchMoviesPublisher = PassthroughSubject<Void, Never>()
 	private let searchDidChangePublisher = PassthroughSubject<String, Never>()
 	private let searchDidCancelPublisher = PassthroughSubject<Void, Never>()
+	private var searchText: String = ""
 	
 	init(viewModel: HomeVM = HomeVM()) {
 		self.viewModel = viewModel
@@ -74,11 +75,11 @@ internal final class HomeVC: UIViewController {
 				return cell
 			}
 			
-			if case let .error(image, title, desc, buttonTitle) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeErrorCell.identifier, for: indexPath) as? HomeErrorCell {
-				cell.set(image: image)
-				cell.set(title: title)
-				cell.set(description: desc)
-				cell.set(buttonTitle: buttonTitle)
+			if case let .error(type) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeErrorCell.identifier, for: indexPath) as? HomeErrorCell {
+				cell.set(image: type.image)
+				cell.set(title: type.title)
+				cell.set(description: type.desc)
+				cell.set(buttonTitle: type.buttonTitle)
 				
 				cell.buttonDidTapPublisher
 					.sink { [weak self] _ in
@@ -129,8 +130,16 @@ internal final class HomeVC: UIViewController {
 			}
 			.store(in: cancellables)
 		
+		searchController.searchBar.searchTextField.didBeginEditingPublisher
+			.sink { [weak self] _ in
+				self?.searchController.searchBar.searchTextField.text = self?.searchText ?? ""
+			}
+			.store(in: cancellables)
+		
 		searchController.searchBar.textDidChangePublisher
+			.debounce(for: 0.75, scheduler: DispatchQueue.main)
 			.sink { [weak self] text in
+				self?.searchText = text
 				self?.searchDidChangePublisher.send(text)
 			}
 			.store(in: cancellables)

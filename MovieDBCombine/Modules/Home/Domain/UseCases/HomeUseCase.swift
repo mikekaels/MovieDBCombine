@@ -13,22 +13,18 @@ internal protocol HomeUseCaseProtocol {
 	func searchMovies(keyword: String, page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse>
 	func getLocalMovies() -> AnyPublisher<[Movie], Error>
 	func saveMovies(movies: [Movie]) -> AnyPublisher<Bool, Error>
-	func shimmers() -> [HomeVM.DataSourceType]
-	func differentiateArrays<T, U: Hashable>(_ array1: [T], _ array2: [T], property: (T) -> U) -> (onlyInFirst: [T], onlyInSecond: [T])
-	
-	var networkReachability: Bool { get }
+	var networkReachability: Bool { get set}
 	var localMovies: [Movie] { get set }
 }
 
 internal final class HomeUseCase {
 	let movieRepository: MovieRepositoryProtocol
-	var networkReachability: Bool {
-		Reachability.isConnectedToNetwork()
-	}
+	var networkReachability: Bool
 	var localMovies: [Movie] = []
 	
-	init(movieRepository: MovieRepositoryProtocol = MovieRepository()) {
+	init(movieRepository: MovieRepositoryProtocol = MovieRepository(), networkReachability: Bool = Reachability.isConnectedToNetwork()) {
 		self.movieRepository = movieRepository
+		self.networkReachability = networkReachability
 	}
 }
 
@@ -88,30 +84,7 @@ extension HomeUseCase: HomeUseCaseProtocol {
 		return movieRepository.getLocalMovies()
 	}
 	
-	func shimmers() -> [HomeVM.DataSourceType] {
-		return [
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-			.shimmer(UUID().uuidString),
-		]
-	}
-	
 	func searchMovies(keyword: String, page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse> {
 		return movieRepository.searchMovies(keyword: keyword, page: page)
-	}
-	
-	func differentiateArrays<T, U: Hashable>(_ array1: [T], _ array2: [T], property: (T) -> U) -> (onlyInFirst: [T], onlyInSecond: [T]) {
-		let set1 = Set(array1.map(property))
-		let set2 = Set(array2.map(property))
-		
-		let onlyInFirst = array1.filter { set2.contains(property($0)) == false }
-		let onlyInSecond = array2.filter { set1.contains(property($0)) == false }
-		
-		return (onlyInFirst, onlyInSecond)
 	}
 }
