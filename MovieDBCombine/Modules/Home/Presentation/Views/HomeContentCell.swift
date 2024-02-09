@@ -107,8 +107,10 @@ internal final class HomeContentCell: UICollectionViewCell {
 }
 
 extension HomeContentCell {
-	internal func set(image: String) {
-		if let url = URL(string: image) {
+	internal func set(url: String, image: Data?) {
+		if let imageData = image {
+			self.imageView.image = UIImage(data: imageData)
+		} else if let url = URL(string: url) {
 			self.imageView.kf.setImage(with: url)
 		}
 	}

@@ -31,7 +31,7 @@ internal struct SearchMovieRequest: APIRequest {
 		let decoded = try JSONDecoder().decode(SearchMovieResponse.self, from: data)
 		let totalResult = Int(decoded.totalResults ?? "0") ?? 0
 		let movies = decoded.search?.compactMap {
-			Movie(posterPath: $0.poster ?? "", year: $0.year ?? "", title: $0.title ?? "")
+			Movie(posterPath: $0.poster ?? "", year: $0.year ?? "", title: $0.title ?? "", image: nil)
 		}
 		
 		return BaseModel(page: page, totalPages: totalResult / 10 == 0 ? 1 : totalResult / 10, items: movies ?? [])

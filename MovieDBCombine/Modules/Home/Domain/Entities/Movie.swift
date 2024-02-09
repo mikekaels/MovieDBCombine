@@ -8,7 +8,7 @@
 import Foundation
 
 
-internal struct Movie: Hashable, Identifiable {
-	let id = UUID()
+internal struct Movie: Hashable {
 	let posterPath, year, title: String
+	let image: Data?
 }

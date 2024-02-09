@@ -18,6 +18,7 @@ internal final class HomeVC: UIViewController {
 	private let viewModel: HomeVM
 	private let cancellables = CancelBag()
 	private let didLoadPublisher = PassthroughSubject<Void, Never>()
+	private let fetchMoviesPublisher = PassthroughSubject<Void, Never>()
 	private let searchDidChangePublisher = PassthroughSubject<String, Never>()
 	private let searchDidCancelPublisher = PassthroughSubject<Void, Never>()
 	
@@ -63,7 +64,7 @@ internal final class HomeVC: UIViewController {
 		let dataSource = UICollectionViewDiffableDataSource<Section, HomeVM.DataSourceType>(collectionView: collectionView) { [weak self] collectionView, indexPath, type in
 			
 			if case let .content(data) = type, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeContentCell.identifier, for: indexPath) as? HomeContentCell {
-				cell.set(image: data.posterPath)
+				cell.set(url: data.posterPath, image: data.image)
 				cell.set(title: data.title)
 				cell.set(year: data.year)
 				return cell
@@ -81,7 +82,7 @@ internal final class HomeVC: UIViewController {
 				
 				cell.buttonDidTapPublisher
 					.sink { [weak self] _ in
-						self?.didLoadPublisher.send(())
+						self?.fetchMoviesPublisher.send(())
 					}
 					.store(in: cell.cancellables)
 				return cell
@@ -94,7 +95,8 @@ internal final class HomeVC: UIViewController {
 	
 	private func bindViewModel() {
 		let action = HomeVM.Action(
-			didLoad: didLoadPublisher,
+			didLoad: didLoadPublisher.eraseToAnyPublisher(),
+			fetchMovies: fetchMoviesPublisher,
 			searchDidCancel: searchDidCancelPublisher.eraseToAnyPublisher(),
 			searchDidChange: searchDidChangePublisher
 		)
@@ -123,7 +125,7 @@ internal final class HomeVC: UIViewController {
 	private func bindView() {
 		collectionView.reachedBottomPublisher()
 			.sink { [weak self] _ in
-				self?.didLoadPublisher.send(())
+				self?.fetchMoviesPublisher.send(())
 			}
 			.store(in: cancellables)
 		
