@@ -7,6 +7,7 @@
 
 import Combine
 import UIKit
+import Networking
 
 internal final class HomeVM {
 	var useCase: HomeUseCaseProtocol
@@ -80,14 +81,14 @@ extension HomeVM {
 				action.showLoading.send(false)
 				if case let .success(movies) = result {
 					self?.useCase.localMovies = movies
-					guard !movies.isEmpty else {
+					if movies.isEmpty {
 						action.fetchMovies.send(())
 						return
 					}
 					
-					let filteredMovies: [Movie] = !state.searchKeyword.isEmpty ? movies.filter { $0.title.contains(state.searchKeyword) } : movies
+					let filteredMovies: [Movie] = !state.searchKeyword.isEmpty ? movies.filter { $0.title.lowercased().contains(state.searchKeyword.lowercased()) } : movies
 					
-					guard !filteredMovies.isEmpty else {
+					if filteredMovies.isEmpty {
 						state.column = 1
 						state.cellHeight = 600
 						state.dataSources = [.error(.notFound(state.searchKeyword))]
@@ -174,6 +175,7 @@ extension HomeVM {
 					state.page += 1
 					
 					action.saveMovies.send(differ.onlyInSecond)
+					self.useCase.localMovies += differ.onlyInSecond
 				}
 			}
 			.store(in: cancellables)
@@ -186,7 +188,7 @@ extension HomeVM {
 				state.totalPage = 0
 				state.dataSources.removeAll()
 				
-				if !self.useCase.networkReachability {
+				if !Reachability.isConnectedToNetwork() {
 					return action.getLocalMovies.send(())
 				}
 				

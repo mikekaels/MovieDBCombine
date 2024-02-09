@@ -13,18 +13,15 @@ internal protocol HomeUseCaseProtocol {
 	func searchMovies(keyword: String, page: Int) -> AnyPublisher<BaseModel<[Movie]>, ErrorResponse>
 	func getLocalMovies() -> AnyPublisher<[Movie], Error>
 	func saveMovies(movies: [Movie]) -> AnyPublisher<Bool, Error>
-	var networkReachability: Bool { get set}
 	var localMovies: [Movie] { get set }
 }
 
 internal final class HomeUseCase {
 	let movieRepository: MovieRepositoryProtocol
-	var networkReachability: Bool
 	var localMovies: [Movie] = []
 	
-	init(movieRepository: MovieRepositoryProtocol = MovieRepository(), networkReachability: Bool = Reachability.isConnectedToNetwork()) {
+	init(movieRepository: MovieRepositoryProtocol = MovieRepository()) {
 		self.movieRepository = movieRepository
-		self.networkReachability = networkReachability
 	}
 }
 
